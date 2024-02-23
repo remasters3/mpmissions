@@ -1,0 +1,178 @@
+void main()
+{
+	//INIT ECONOMY--------------------------------------
+	Hive ce = CreateHive();
+	if ( ce )
+		ce.InitOffline();
+
+	//DATE RESET AFTER ECONOMY INIT-------------------------
+	int year, month, day, hour, minute;
+	int reset_month = 9, reset_day = 20;
+	GetGame().GetWorld().GetDate(year, month, day, hour, minute);
+
+	if ((month == reset_month) && (day < reset_day))
+	{
+		GetGame().GetWorld().SetDate(year, reset_month, reset_day, hour, minute);
+	}
+	else
+	{
+		if ((month == reset_month + 1) && (day > reset_day))
+		{
+			GetGame().GetWorld().SetDate(year, reset_month, reset_day, hour, minute);
+		}
+		else
+		{
+			if ((month < reset_month) || (month > reset_month + 1))
+			{
+				GetGame().GetWorld().SetDate(year, reset_month, reset_day, hour, minute);
+			}
+		}
+	}
+}
+
+class CustomMission: MissionServer
+{
+	void SetRandomHealth(EntityAI itemEnt)
+	{
+		if ( itemEnt )
+		{
+			float rndHlt = Math.RandomFloat( 0.45, 0.65 );
+			itemEnt.SetHealth01( "", "", rndHlt );
+		}
+	}
+
+	override PlayerBase CreateCharacter(PlayerIdentity identity, vector pos, ParamsReadContext ctx, string characterName)
+	{
+		Entity playerEnt;
+		playerEnt = GetGame().CreatePlayer( identity, characterName, pos, 0, "NONE" );
+		Class.CastTo( m_player, playerEnt );
+		GetGame().SelectPlayer( identity, m_player );
+		return m_player;
+	}
+
+	override void StartingEquipSetup(PlayerBase player, bool clothesChosen)
+	{
+		EntityAI itemClothing;
+		EntityAI itemEnt;
+		ItemBase itemBs;
+		float rand;
+        player.RemoveAllItems();
+
+        //player_class 0
+        array<string> Player_0_Jackets = { "TShirt_Black", "TShirt_Grey", "TShirt_Green", "TShirt_Red", "TShirt_White" };
+        array<string> Player_0_Pants = { "Jeans_Black", "Jeans_Grey", "Jeans_Green", "Jeans_Brown", "Jeans_BlueDark" };
+        array<string> Player_0_Hats = { "BaseballCap_Black", "BaseballCap_CMMG_Pink", "BaseballCap_Olive", "BaseballCap_Red", "BaseballCap_Beige" };
+        array<string> Player_0_Shoes = { "Sneakers_Black", "Sneakers_Gray", "Sneakers_Green", "Sneakers_Red", "Sneakers_White" };
+        //player_class 1
+        array<string> Player_1_Jackets = { "ManSuit_Beige", "ManSuit_Black", "ManSuit_Blue", "ManSuit_Brown", "ManSuit_DarkGrey","ManSuit_Khaki","ManSuit_LightGrey","ManSuit_White" };
+        array<string> Player_1_Pants = { "SlacksPants_Beige", "SlacksPants_Black", "SlacksPants_Blue", "SlacksPants_Brown", "SlacksPants_DarkGrey","SlacksPants_Khaki","SlacksPants_LightGrey","SlacksPants_White" };
+        array<string> Player_1_Hats = { "FlatCap_BrownCheck", "FlatCap_Black", "FlatCap_Blue", "FlatCap_Brown", "FlatCap_Grey","FlatCap_Brown","FlatCap_GreyCheck","FlatCap_BlackCheck" };
+        array<string> Player_1_Shoes = { "DressShoes_Beige", "DressShoes_Black", "DressShoes_Black", "DressShoes_Brown", "DressShoes_Sunburst","DressShoes_Brown","DressShoes_White","DressShoes_White" };
+        //player_class 2
+        array<string> Player_2_Jackets = { "PrisonUniformJacket", "PrisonUniformJacket" };
+        array<string> Player_2_Pants = { "PrisonUniformPants", "PrisonUniformPants" };
+        array<string> Player_2_Hats = { "PrisonerCap", "PrisonerCap" };
+        array<string> Player_2_Shoes = { "AthleticShoes_Black", "AthleticShoes_Blue" };
+        //player_class 3
+        array<string> Player_3_Jackets = { "MedicalScrubsShirt_Blue", "MedicalScrubsShirt_Green", "MedicalScrubsShirt_White" };
+        array<string> Player_3_Pants = { "MedicalScrubsPants_Blue", "MedicalScrubsPants_Green", "MedicalScrubsPants_White" };
+        array<string> Player_3_Hats = { "MedicalScrubsHat_Blue", "MedicalScrubsHat_Green", "MedicalScrubsHat_White" };
+        array<string> Player_3_Shoes = { "AthleticShoes_Black", "AthleticShoes_Grey", "AthleticShoes_Green" };
+        //player_class 4
+        array<string> Player_4_Jackets = { "TrackSuitJacket_Black", "TrackSuitJacket_Blue", "TrackSuitJacket_Green", "TrackSuitJacket_LightBlue", "TrackSuitJacket_Red" };
+        array<string> Player_4_Pants = { "TrackSuitPants_Black", "TrackSuitPants_Blue", "TrackSuitPants_Green", "TrackSuitPants_LightBlue", "TrackSuitPants_Red" };
+        array<string> Player_4_Hats = { "BaseballCap_Black", "BaseballCap_Blue", "BaseballCap_Olive", "BaseballCap_Red", "BaseballCap_Beige" };
+        array<string> Player_4_Shoes = { "AthleticShoes_Black", "AthleticShoes_Blue", "AthleticShoes_Green", "AthleticShoes_Grey", "AthleticShoes_Brown" };
+
+
+        int player_class = Math.RandomInt( 0, 5 );
+        // int player_class = 2;       
+        if ( player_class == 1 )
+        {
+            int index_1a = Math.RandomInt( 0, 8 );
+            itemEnt = player.GetInventory().CreateInInventory( Player_1_Jackets[index_1a] );
+            int index_1b = Math.RandomInt( 0, 8 );
+            itemEnt = player.GetInventory().CreateInInventory( Player_1_Pants[index_1b] );
+            int index_1c = Math.RandomInt( 0, 8 );
+            itemEnt = player.GetInventory().CreateInInventory( Player_1_Hats[index_1c] );
+            int index_1d = Math.RandomInt( 0, 8 );
+            itemEnt = player.GetInventory().CreateInInventory( Player_1_Shoes[index_1d] );
+        }
+        else if ( player_class == 2 )
+        {
+            int index_2a = Math.RandomInt( 0, 2 );
+            itemEnt = player.GetInventory().CreateInInventory( Player_2_Jackets[index_2a] );
+            int index_2b = Math.RandomInt( 0, 2 );
+            itemEnt = player.GetInventory().CreateInInventory( Player_2_Pants[index_2b] );
+            int index_2c = Math.RandomInt( 0, 2 );
+            itemEnt = player.GetInventory().CreateInInventory( Player_2_Hats[index_2c] );
+            int index_2d = Math.RandomInt( 0, 2 );
+            itemEnt = player.GetInventory().CreateInInventory( Player_2_Shoes[index_2d] );
+        }
+        else if ( player_class == 3 )
+        {
+            int index_3a = Math.RandomInt( 0, 3 );
+            itemEnt = player.GetInventory().CreateInInventory( Player_3_Jackets[index_3a] );
+            int index_3b = Math.RandomInt( 0, 3 );                    
+            itemEnt = player.GetInventory().CreateInInventory( Player_3_Pants[index_3b] );
+            int index_3c = Math.RandomInt( 0, 3 );                    
+            itemEnt = player.GetInventory().CreateInInventory( Player_3_Hats[index_3c] );
+            int index_3d = Math.RandomInt( 0, 3 );                    
+            itemEnt = player.GetInventory().CreateInInventory( Player_3_Shoes[index_3d] );
+        }
+        else if ( player_class == 4 )
+        {
+            int index_4a = Math.RandomInt( 0, 5 );
+            itemEnt = player.GetInventory().CreateInInventory( Player_4_Jackets[index_4a] );
+            int index_4b = Math.RandomInt( 0, 5 );                    
+            itemEnt = player.GetInventory().CreateInInventory( Player_4_Pants[index_4b] );
+            int index_4c = Math.RandomInt( 0, 5 );                    
+            itemEnt = player.GetInventory().CreateInInventory( Player_4_Hats[index_4c] );
+            int index_4d = Math.RandomInt( 0, 5 );                    
+            itemEnt = player.GetInventory().CreateInInventory( Player_4_Shoes[index_4d] );
+        }
+        else
+        {
+            int index_0a = Math.RandomInt( 0, 5 );
+            itemEnt = player.GetInventory().CreateInInventory( Player_0_Jackets[index_0a] );
+            int index_0b = Math.RandomInt( 0, 5 );
+            itemEnt = player.GetInventory().CreateInInventory( Player_0_Pants[index_0b] );
+            int index_0c = Math.RandomInt( 0, 5 );
+            itemEnt = player.GetInventory().CreateInInventory( Player_0_Hats[index_0c] );
+            int index_0d = Math.RandomInt( 0, 5 );
+            itemEnt = player.GetInventory().CreateInInventory( Player_0_Shoes[index_0d] );
+        }
+
+		itemClothing = player.FindAttachmentBySlotName( "Body" );
+		if ( itemClothing )
+		{
+
+
+			itemEnt = itemClothing.GetInventory().CreateInInventory( "BandageDressing" );
+			if ( Class.CastTo( itemBs, itemEnt ) )
+				//itemBs.SetQuantity( 2 );
+
+			string chemlightArray[] = { "Chemlight_White", "Chemlight_Yellow", "Chemlight_Green", "Chemlight_Red" };
+			int rndIndex = Math.RandomInt( 0, 4 );
+			itemEnt = itemClothing.GetInventory().CreateInInventory( chemlightArray[rndIndex] );
+
+
+			rand = Math.RandomFloatInclusive( 0.0, 1.0 );
+			if ( rand < 0.35 )
+				itemEnt = player.GetInventory().CreateInInventory( "Apple" );
+			else if ( rand > 0.65 )
+				itemEnt = player.GetInventory().CreateInInventory( "Apple" );
+			else
+				itemEnt = player.GetInventory().CreateInInventory( "Apple" );
+
+			SetRandomHealth( itemEnt );
+		}
+        itemEnt = player.GetInventory().CreateInInventory("WaterBottle");
+		itemEnt = player.GetInventory().CreateInInventory("SteakKnife");  
+	}
+};
+
+Mission CreateCustomMission(string path)
+{
+	return new CustomMission();
+}
