@@ -982,6 +982,40 @@
             <child lootmax="0" lootmin="0" max="2" min="3" type="Offroad_02"/>
         </children>
     </event>
+	    <event name="ReHummer">
+        <nominal>3</nominal>
+        <min>2</min>
+        <max>3</max>
+        <lifetime>300</lifetime>
+        <restock>0</restock>
+        <saferadius>500</saferadius>
+        <distanceradius>500</distanceradius>
+        <cleanupradius>200</cleanupradius>
+        <flags deletable="0" init_random="0" remove_damaged="1"/>
+        <position>fixed</position>
+        <limit>mixed</limit>
+        <active>1</active>
+        <children>
+            <child lootmax="0" lootmin="0" max="2" min="3" type="Offroad_02"/>
+        </children>
+    </event>
+	    <event name="ReOffroad">
+        <nominal>16</nominal>
+        <min>10</min>
+        <max>22</max>
+        <lifetime>300</lifetime>
+        <restock>0</restock>
+        <saferadius>100</saferadius>
+        <distanceradius>100</distanceradius>
+        <cleanupradius>200</cleanupradius>
+        <flags deletable="0" init_random="0" remove_damaged="1"/>
+        <position>fixed</position>
+        <limit>mixed</limit>
+        <active>1</active>
+        <children>
+            <child lootmax="0" lootmin="0" max="5" min="3" type="OffroadHatchback"/>
+        </children>
+    </event>
     <event name="VehicleOffroadHatchback">
         <nominal>16</nominal>
         <min>10</min>
