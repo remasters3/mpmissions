@@ -1,6 +1,12 @@
-static Object SpawnObject(string type, vector position, vector orientation)
+static Object SpawnObject(string type, vector position, vector orientation, float scale = 1.0)
 {
-    Object obj = GetGame().CreateObjectEx(type, position, ECE_SETUP | ECE_UPDATEPATHGRAPH | ECE_CREATEPHYSICS);
+    Object obj;
+    if (type.Contains(".p3d")) {
+        obj = GetGame().CreateStaticObjectUsingP3D(type, position, orientation, scale, false);
+    } else {        
+        obj = GetGame().CreateObjectEx(type, position, ECE_SETUP | ECE_CREATEPHYSICS | ECE_NOLIFETIME | ECE_NOPERSISTENCY_WORLD | ECE_NOPERSISTENCY_CHAR);
+    }
+
     if (!obj) {
         Error("Failed to create object " + type);
         return null;
@@ -9,7 +15,7 @@ static Object SpawnObject(string type, vector position, vector orientation)
     obj.SetPosition(position);
     obj.SetOrientation(orientation);
     obj.SetOrientation(obj.GetOrientation());
-    obj.SetFlags(EntityFlags.STATIC, false);
+    obj.SetScale(scale);
     obj.Update();
 	obj.SetAffectPathgraph(true, false);
 	if (obj.CanAffectPathgraph()) {
@@ -21,6 +27,38 @@ static Object SpawnObject(string type, vector position, vector orientation)
 
 void main()
 {
+// Created Objects
+	SpawnObject("StaticObj_Wall_IndCnc_10", "2508.685791 237.461456 4663.173340", "-173.561798 0.000000 -0.000000", 1);
+	SpawnObject("StaticObj_Wall_IndCnc_10", "2473.420898 237.353180 4702.729004", "-81.929131 0.000000 0.000000", 1);
+	SpawnObject("StaticObj_Wall_IndCnc_10", "2477.907715 237.278305 4706.000000", "11.180381 0.000000 -0.000000", 1);
+	SpawnObject("StaticObj_Wall_IndCnc_10", "2486.340576 237.222565 4704.315430", "11.180381 0.000000 -0.000000", 1);
+	SpawnObject("StaticObj_Wall_IndCnc_10", "2516.616699 237.628372 4664.949707", "146.418350 0.000000 -0.000000", 1);
+	SpawnObject("StaticObj_Wall_IndCnc_10", "2520.012207 236.207977 4696.425293", "-151.981735 0.000000 -0.000000", 1);
+	SpawnObject("StaticObj_Wall_IndCnc_10", "2524.420654 237.342682 4685.585938", "67.793213 0.000000 -0.000000", 1);
+	SpawnObject("StaticObj_Wall_IndCnc_10", "2526.500977 237.379272 4677.435059", "82.782547 0.000000 -0.000000", 1);
+	SpawnObject("Land_Misc_FireBarrel_Red", "2507.957031 234.203598 4682.822754", "-44.999992 0.000000 0.000000", 1);
+	SpawnObject("StaticObj_Bridge_Stone_25", "6583.569336 329.152008 9300.870117", "18.000000 0.000000 -0.000000", 1);
+	SpawnObject("Land_Barn_Wood1", "6573.623535 340.821075 9269.486328", "17.999998 0.000000 -0.000000", 1);
+	SpawnObject("StaticObj_Bridge_Stone_25", "6591.278809 329.152283 9324.486328", "18.000000 0.000000 -0.000000", 1);
+	SpawnObject("Land_Mil_ControlTower_East", "2489.822266 240.578659 4683.584961", "-176.486008 0.000000 -0.000000", 1);
+	SpawnObject("Land_Mil_ControlTower", "2512.163818 200.953705 5141.335449", "-96.915771 0.000000 -0.000000", 1);
+	SpawnObject("Land_Misc_Well_Pump_Yellow", "2496.166992 234.359314 4672.566406", "-90.720840 0.000000 -0.000000", 1);
+	SpawnObject("StaticObj_Wall_IndCnc_10", "2488.603271 237.536240 4674.063965", "-155.893616 0.000000 -0.000000", 1);
+	SpawnObject("StaticObj_Wall_IndCnc_10", "2482.457520 237.551376 4676.302734", "14.635978 0.000000 -0.000000", 1);
+	SpawnObject("StaticObj_Wall_IndCnc_10", "2473.693604 237.584625 4689.550781", "-93.659378 0.000000 -0.000000", 1);
+	SpawnObject("StaticObj_Wall_IndCnc_10", "2476.025391 237.632629 4681.243652", "-117.030739 0.000000 -0.000000", 1);
+	SpawnObject("StaticObj_Wall_IndCnc_10", "2494.106445 237.477188 4668.410156", "-113.126976 0.000000 -0.000000", 1);
+	SpawnObject("StaticObj_Wall_IndCnc_10", "2523.650146 237.334915 4670.269043", "138.966782 0.000000 -0.000000", 1);
+	SpawnObject("StaticObj_Wall_IndCnc_10", "2494.766357 237.211945 4702.678223", "11.180381 0.000000 -0.000000", 1);
+	SpawnObject("StaticObj_Wall_IndCnc_10", "2503.529785 236.154282 4700.913574", "11.180381 0.000000 -0.000000", 1);
+	SpawnObject("StaticObj_Wall_IndCnc_10", "2499.907471 237.339462 4664.095215", "-173.561798 0.000000 -0.000000", 1);
+	SpawnObject("StaticObj_Wall_IndCnc_10", "2511.841064 236.162521 4699.317383", "11.885278 0.000000 -0.000000", 1);
+
+
+	// Uncomment if you want to export loot from newly added buildings
+	// Position, Radius (increase if you have a larger map than Chernarus)
+	GetCEApi().ExportProxyData(Vector(7500, GetGame().SurfaceY(7500, 7500), 7500), 20000);
+
     //INIT ECONOMY--------------------------------------
     Hive ce = CreateHive();
     if ( ce )
@@ -49,17 +87,6 @@ void main()
             }
         }
     }
-    
-    //SpawnObject("Land_Office_Municipal2", "4099.696777 370.635742 10649.987305", "161.270859 -0.000000 -0.000000");
-    //SpawnObject("Land_Mil_GuardTower", "4243.538086 344.346069 10995.006836", "-116.736763 0.000000 -0.000000");
-    //SpawnObject("Land_Office_Municipal2", "4240.404785 370.739349 10212.217773", "-131.135010 0.000000 -0.000000");
-    //SpawnObject("Land_Tower_TC5", "4630.498535 358.456726 9586.584961", "0.000000 -0.000000 -0.000000");
-    //SpawnObject("Land_Mil_ControlTower", "4327.233398 346.569031 10875.312500", "50.595417 -0.000000 -0.000000");
-    //SpawnObject("Land_Castle_Bergfrit", "3995.628662 358.688171 10380.584961", "-128.621368 0.000000 -0.000000");
-    //SpawnObject("Land_Castle_Stairs_nolc", "3998.738770 348.763367 10372.528320", "-40.645191 0.000000 -0.000000");
-    //SpawnObject("Land_Sawmill_Illuminanttower", "5145.929199 351.436401 9703.166992", "46.628014 -0.000000 -0.000000");
-    //SpawnObject("Land_Misc_Well_Pump_Yellow", "3695.897461 402.507782 6006.879883", "86.164833 -0.000000 -0.000000", 1);
-    //SpawnObject("Land_Misc_Well_Pump_Yellow", "2489.085938 233.496170 4687.829590", "86.164833 -0.000000 -0.000000", 1);
     
 }
 
