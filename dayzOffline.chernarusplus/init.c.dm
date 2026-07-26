@@ -27,22 +27,21 @@ static Object SpawnObject(string type, vector position, vector orientation, floa
 
 void main()
 {
-// Created Objects
+	// Created Objects
 	SpawnObject("StaticObj_Wall_IndCnc_10", "2508.685791 237.461456 4663.173340", "-173.561798 0.000000 -0.000000", 1);
 	SpawnObject("StaticObj_Wall_IndCnc_10", "2473.420898 237.353180 4702.729004", "-81.929131 0.000000 0.000000", 1);
 	SpawnObject("StaticObj_Wall_IndCnc_10", "2477.907715 237.278305 4706.000000", "11.180381 0.000000 -0.000000", 1);
 	SpawnObject("StaticObj_Wall_IndCnc_10", "2486.340576 237.222565 4704.315430", "11.180381 0.000000 -0.000000", 1);
 	SpawnObject("StaticObj_Wall_IndCnc_10", "2516.616699 237.628372 4664.949707", "146.418350 0.000000 -0.000000", 1);
-	SpawnObject("StaticObj_Wall_IndCnc_10", "2520.012207 236.207977 4696.425293", "-151.981735 0.000000 -0.000000", 1);
+	SpawnObject("StaticObj_Wall_IndCnc_10", "2520.012207 236.207977 4696.425293", "-151.981720 0.000000 -0.000000", 1);
 	SpawnObject("StaticObj_Wall_IndCnc_10", "2524.420654 237.342682 4685.585938", "67.793213 0.000000 -0.000000", 1);
 	SpawnObject("StaticObj_Wall_IndCnc_10", "2526.500977 237.379272 4677.435059", "82.782547 0.000000 -0.000000", 1);
-	SpawnObject("Land_Misc_FireBarrel_Red", "2507.957031 234.203598 4682.822754", "-44.999992 0.000000 0.000000", 1);
 	SpawnObject("StaticObj_Bridge_Stone_25", "6583.569336 329.152008 9300.870117", "18.000000 0.000000 -0.000000", 1);
 	SpawnObject("Land_Barn_Wood1", "6573.623535 340.821075 9269.486328", "17.999998 0.000000 -0.000000", 1);
 	SpawnObject("StaticObj_Bridge_Stone_25", "6591.278809 329.152283 9324.486328", "18.000000 0.000000 -0.000000", 1);
-	SpawnObject("Land_Mil_ControlTower_East", "2489.822266 240.578659 4683.584961", "-176.486008 0.000000 -0.000000", 1);
+	SpawnObject("Land_Mil_ControlTower_East", "2489.822266 240.578659 4683.584961", "-176.485992 0.000000 -0.000000", 1);
 	SpawnObject("Land_Mil_ControlTower", "2512.163818 200.953705 5141.335449", "-96.915771 0.000000 -0.000000", 1);
-	SpawnObject("Land_Misc_Well_Pump_Yellow", "2496.166992 234.359314 4672.566406", "-90.720840 0.000000 -0.000000", 1);
+	SpawnObject("Land_Misc_Well_Pump_Yellow", "2487.208008 233.770966 4688.309570", "-94.072830 1.066425 -0.242567", 0.999935);
 	SpawnObject("StaticObj_Wall_IndCnc_10", "2488.603271 237.536240 4674.063965", "-155.893616 0.000000 -0.000000", 1);
 	SpawnObject("StaticObj_Wall_IndCnc_10", "2482.457520 237.551376 4676.302734", "14.635978 0.000000 -0.000000", 1);
 	SpawnObject("StaticObj_Wall_IndCnc_10", "2473.693604 237.584625 4689.550781", "-93.659378 0.000000 -0.000000", 1);
@@ -52,7 +51,8 @@ void main()
 	SpawnObject("StaticObj_Wall_IndCnc_10", "2494.766357 237.211945 4702.678223", "11.180381 0.000000 -0.000000", 1);
 	SpawnObject("StaticObj_Wall_IndCnc_10", "2503.529785 236.154282 4700.913574", "11.180381 0.000000 -0.000000", 1);
 	SpawnObject("StaticObj_Wall_IndCnc_10", "2499.907471 237.339462 4664.095215", "-173.561798 0.000000 -0.000000", 1);
-	SpawnObject("StaticObj_Wall_IndCnc_10", "2511.841064 236.162521 4699.317383", "11.885278 0.000000 -0.000000", 1);
+	SpawnObject("StaticObj_Wall_IndCnc_10", "2511.841064 236.162521 4699.317383", "11.885277 0.000000 -0.000000", 1);
+	SpawnObject("Land_Misc_Greenhouse", "2490.374023 234.243240 4689.471680", "8.283584 0.000000 -0.000000", 1);
 
 
 	// Uncomment if you want to export loot from newly added buildings
