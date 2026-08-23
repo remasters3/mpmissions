@@ -54,8 +54,6 @@ void main()
 	SpawnObject("StaticObj_Wall_IndCnc_10", "2499.907471 237.339462 4664.095215", "-173.561798 0.000000 -0.000000", 1);
 	SpawnObject("StaticObj_Wall_IndCnc_10", "2511.841064 236.162521 4699.317383", "11.885277 0.000000 -0.000000", 1);
 	SpawnObject("Land_Misc_Greenhouse", "2490.374023 234.243240 4689.471680", "8.283581 0.000000 -0.000000", 1);
-	SpawnObject("Land_Ladder_Half", "2493.994629 244.700607 4683.996582", "-81.614098 0.000000 0.000000", 1);
-	SpawnObject("dz/structures_sakhal/residential/misc/misc_firebarrel_green.p3d", "2513.265137 232.972534 4681.806152", "-1.440108 0.000000 0.000000", 1);
 
 
 	// Uncomment if you want to export loot from newly added buildings
